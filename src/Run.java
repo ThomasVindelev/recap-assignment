@@ -11,12 +11,15 @@ public class Run {
     public void run() {
         System.out.println("Hej - velkommen til kursussystemet");
         Scanner scanner = new Scanner(System.in);
-        String option = "";
+
         List<Student> students = new ArrayList<>();
         List<Teacher> teachers = new ArrayList<>();
+
         studentInitializer(students, scanner);
         teacherInitializer(teachers, scanner);
-            while (!option.equals("exit")) {
+
+        String option = "";
+        while (!option.equals("exit")) {
             System.out.println("1. Opret kursus  2. Slet kursus  3. Tilknyt lærer  " +
                     "4. Tilknyt elev  5. Tilknyt eksamen  6. Slet eksamen   " +
                     "7. Afmeld studerende  8. Afmeld lærer  'exit': Afslut");
