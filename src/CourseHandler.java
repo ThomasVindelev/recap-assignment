@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class CourseHandler {
 
-    private Random rand = new Random();
+    private Random rand = new Random(1000);
 
     public Course createCourse(Scanner scanner, List studentList, List teacherList) {
         System.out.println("Angiv navnet for det nye kursus: ");

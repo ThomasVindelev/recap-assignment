@@ -34,7 +34,18 @@ public class UI {
 
                     break;
                 case "3":
-
+                    for (Course course : coursesInSystem) {
+                        System.out.println(course);
+                        for (int j = 0; j < course.getStudents().size(); j++) {
+                            System.out.println(course.getStudents().get(j));
+                        }
+                        for (int k = 0; k < course.getTeachers().size(); k++) {
+                            System.out.println(course.getTeachers().get(k));
+                        }
+                        for (int L = 0; L < course.getExams().size(); L++) {
+                            System.out.println(course.getExams().get(L));
+                        }
+                    }
                     break;
                 case "4":
 
