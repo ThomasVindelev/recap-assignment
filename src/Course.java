@@ -8,7 +8,8 @@ public class Course {
     private List<Teacher> teachers;
     private List<Exam> exams;
 
-    public Course(String courseName, List<Student> students, List<Teacher> teachers, List<Exam> exams) {
+    public Course(int id, String courseName, List<Student> students, List<Teacher> teachers, List<Exam> exams) {
+        this.id = id;
         this.courseName = courseName;
         this.students = students;
         this.teachers = teachers;
@@ -53,5 +54,9 @@ public class Course {
 
     public void setExams(List<Exam> exams) {
         this.exams = exams;
+    }
+
+    public String toString() {
+        return "ID: " + id + "  Kursus-Navn: " + courseName;
     }
 }

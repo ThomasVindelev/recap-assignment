@@ -23,4 +23,8 @@ public class Teacher {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String toString() {
+        return "ID: " + id + "  Navn: " + name + "  Lærer";
+    }
 }
