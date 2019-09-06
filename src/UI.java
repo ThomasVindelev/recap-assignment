@@ -65,29 +65,60 @@ public class UI {
         System.out.println("Angiv navnet for det nye kursus: ");
         String courseName = scanner.nextLine();
 
-        System.out.println("Angiv undervisere og eksaminatorer til kurset");
-        for (Teacher teacher : teachersInSystem) {
-            System.out.println(teacher);
+
+        ArrayList<Teacher> tempTeacherList = makeList("undervisere og eksaminatorer", teachersInSystem);
+        ArrayList<Student> tempStudentList = makeList("studerende", studentsInSystem);
+
+
+        System.out.println("Tilføj én eller flere Eksamner til kurset");
+        ArrayList<Exam> tempExamList = new ArrayList<>();
+
+        scanner.nextLine();
+
+        String choice2;
+        do {
+            System.out.println("Navn på eksamen");
+            choice2 = scanner.nextLine();
+            tempExamList.add(new Exam(1, choice2));
+            System.out.println("Eksamen tilføjet \n");
+
+            System.out.println("Skriv 'afslut' for at færdiggøre kurset, tryk 'ENTER' for at tilføje flere eksamner");
+            choice2 = scanner.nextLine();
+        } while (!choice2.equals("afslut"));
+
+        coursesInSystem.add(new Course(2, courseName, tempStudentList, tempTeacherList, tempExamList));
+
+        //For Testing
+        /*for(Course course : coursesInSystem) {
+            for(Exam teacher : course.getExams()) {
+                System.out.println(teacher);
+            }
+        }*/
+    }
+
+    private ArrayList makeList(String type, List startList) {
+        ArrayList<Object> tempList = new ArrayList<>();
+        System.out.println("Angiv " + type + " til kurset");
+        for (Object o : startList) {
+            System.out.println(o);
         }
         System.out.println("0 for at afslutte angivelse");
-
-        ArrayList<Teacher> tempTeacherList = new ArrayList<>();
 
         int choice = -1;
         while (choice != 0) {
             choice = scanner.nextInt();
             if(choice != 0) {
-                tempTeacherList.add(teachersInSystem.get(choice - 1));
-                System.out.println(teachersInSystem.get(choice - 1).getName() + " has been added");
+                tempList.add(startList.get(choice - 1));
+                System.out.println(startList.get(choice - 1) + " has been added");
             }
         }
 
-        coursesInSystem.add(new Course(2, courseName, new ArrayList<Student>(), tempTeacherList, new ArrayList<Exam>()));
-
-        for(Course course : coursesInSystem) {
-            System.out.println(course);
-        }
+        return tempList;
     }
+
+
+
+
 
     private void studentInitializer(List<Student> students, Scanner scanner) {
         System.out.println("Skriv fem navne på studerende:");
