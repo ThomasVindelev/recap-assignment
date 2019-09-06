@@ -66,13 +66,12 @@ public class UI {
         String courseName = scanner.nextLine();
 
 
-        ArrayList<Teacher> tempTeacherList = makeList("undervisere og eksaminatorer", teachersInSystem);
-        ArrayList<Student> tempStudentList = makeList("studerende", studentsInSystem);
+        List<Teacher> tempTeacherList = makeList("undervisere og eksaminatorer", teachersInSystem);
+        List<Student> tempStudentList = makeList("studerende", studentsInSystem);
 
 
         System.out.println("Tilføj én eller flere Eksamner til kurset");
-        ArrayList<Exam> tempExamList = new ArrayList<>();
-
+        List<Exam> tempExamList = new ArrayList<>();
         scanner.nextLine();
 
         String choice2;
@@ -82,7 +81,7 @@ public class UI {
             tempExamList.add(new Exam(1, choice2));
             System.out.println("Eksamen tilføjet \n");
 
-            System.out.println("Skriv 'afslut' for at færdiggøre kurset, tryk 'ENTER' for at tilføje flere eksamner");
+            System.out.println("Skriv 'afslut' for at færdiggøre kurset, tryk blot 'ENTER' for at tilføje flere eksamner");
             choice2 = scanner.nextLine();
         } while (!choice2.equals("afslut"));
 
@@ -96,23 +95,20 @@ public class UI {
         }*/
     }
 
-    private ArrayList makeList(String type, List startList) {
-        ArrayList<Object> tempList = new ArrayList<>();
+    private List makeList(String type, List systemList) {
+        List<Object> tempList = new ArrayList<>();
         System.out.println("Angiv " + type + " til kurset");
-        for (Object o : startList) {
+        for (Object o : systemList) {
             System.out.println(o);
         }
         System.out.println("0 for at afslutte angivelse");
 
-        int choice = -1;
+        int choice = scanner.nextInt();
         while (choice != 0) {
-            choice = scanner.nextInt();
-            if(choice != 0) {
-                tempList.add(startList.get(choice - 1));
-                System.out.println(startList.get(choice - 1) + " has been added");
-            }
+                tempList.add(systemList.get(choice - 1));
+                System.out.println(systemList.get(choice - 1) + " has been added");
+                choice = scanner.nextInt();
         }
-
         return tempList;
     }
 
