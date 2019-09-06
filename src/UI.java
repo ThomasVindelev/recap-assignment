@@ -22,9 +22,9 @@ public class UI {
 
         String option = "";
         while (!option.equals("exit")) {
-            System.out.println("1. Opret kursus  2. Slet kursus  3. Tilknyt lærer  " +
-                    "4. Tilknyt elev  5. Tilknyt eksamen  6. Slet eksamen   " +
-                    "7. Afmeld studerende  8. Afmeld lærer  'exit': Afslut");
+            System.out.println("1. Opret kursus  2. Slet kursus  3. Se oprettede kurser  " +
+                    "4. Tilknyt lærer  5. Tilknyt studerende til kursus  6. Tilknyt eksamen  7. Slet eksamen   " +
+                    "8. Afmeld studerende  9. Afmeld lærer  10. Tilføj studerende til system  11. Tilføj lærer til system  'exit': Afslut");
             option = scanner.nextLine();
             switch (option) {
                 case "1":
@@ -49,6 +49,15 @@ public class UI {
 
                     break;
                 case "8":
+
+                    break;
+                case "9":
+
+                    break;
+                case "10":
+
+                    break;
+                case "11":
 
                     break;
                 case "exit":
