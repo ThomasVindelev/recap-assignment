@@ -1,10 +1,12 @@
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Exam {
 
     private int id;
     private String name;
 
-    public Exam(int id, String name) {
-        this.id = id;
+    public Exam(String name, AtomicInteger id) {
+        this.id = id.incrementAndGet();
         this.name = name;
     }
 
@@ -25,6 +27,6 @@ public class Exam {
     }
 
     public String toString() {
-        return "ID: " + id + "  Navn: " + name;
+        return "ID: " + id + "  Navn: " + name + " Eksamen";
     }
 }
