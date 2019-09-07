@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -49,8 +51,8 @@ public class CourseHandler {
             course.getExams().add(new Exam(examName, examId));
             examName = scanner.nextLine();
         }
-
     }
+
 
     private List makeList(Scanner scanner, String type, List systemList) {
         List<Object> tempList = new ArrayList<>();
