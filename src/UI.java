@@ -37,18 +37,7 @@ public class UI {
                     coursesInSystem.remove(scanner.nextInt());
                     break;
                 case "3":
-                    for (Course course : coursesInSystem) {
-                        System.out.println(course);
-                        for (int j = 0; j < course.getStudents().size(); j++) {
-                            System.out.println(course.getStudents().get(j));
-                        }
-                        for (int k = 0; k < course.getTeachers().size(); k++) {
-                            System.out.println(course.getTeachers().get(k));
-                        }
-                        for (int L = 0; L < course.getExams().size(); L++) {
-                            System.out.println(course.getExams().get(L));
-                        }
-                    }
+                    viewCourses();
                     break;
                 case "4":
 
@@ -85,6 +74,20 @@ public class UI {
         }
     }
 
+    private void viewCourses() {
+        for (Course course : coursesInSystem) {
+            System.out.println(course);
+            for (int j = 0; j < course.getStudents().size(); j++) {
+                System.out.println(course.getStudents().get(j));
+            }
+            for (int k = 0; k < course.getTeachers().size(); k++) {
+                System.out.println(course.getTeachers().get(k));
+            }
+            for (int L = 0; L < course.getExams().size(); L++) {
+                System.out.println(course.getExams().get(L));
+            }
+        }
+    }
 
     private void studentInitializer(List<Student> students, Scanner scanner) {
         System.out.println("Skriv fem navne på studerende:");
