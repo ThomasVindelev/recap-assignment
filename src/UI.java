@@ -79,10 +79,10 @@ public class UI {
 
                     break;
                 case "10":
-
+                    addPeopleToSystem("student");
                     break;
                 case "11":
-
+                    addPeopleToSystem("teacher");
                     break;
                 case "exit":
                     System.out.println("Lukker ned...");
@@ -153,14 +153,12 @@ public class UI {
     }
 
     private void studentInitializer(List<Student> students) {
-        System.out.println("Skriv fem navne på studerende:");
         for (int i = 0; i < 5; i++) {
             students.add(new Student(studentId.incrementAndGet(), "S" + (i+1)));
         }
     }
 
     private void teacherInitializer(List<Teacher> teachers) {
-        System.out.println("Skriv fem navne på lærere:");
         for (int i = 0; i < 5; i++) {
             teachers.add(new Teacher(teacherId.incrementAndGet(), "L" + (i+1)));
         }
