@@ -10,6 +10,7 @@ public class UI {
     -Check for duplicates
     -Make proper id's
     -Better toString
+    -Method for getting course
      */
 
 
@@ -70,13 +71,13 @@ public class UI {
                     courseHandler.addExamToCourse(scanner, coursesInSystem);
                     break;
                 case "7":
-
+                    removeFromCourse("exam");
                     break;
                 case "8":
-
+                    removeFromCourse("student");
                     break;
                 case "9":
-
+                    removeFromCourse("teacher");
                     break;
                 case "10":
                     addPeopleToSystem("student");
@@ -150,6 +151,45 @@ public class UI {
             choice = scanner.nextInt();
         }
         scanner.nextLine();
+    }
+
+    public void removeFromCourse(String type) {
+        viewCourses();
+        System.out.println("Vælg et kursus:");
+        int choice = scanner.nextInt();
+        Course course = coursesInSystem.get(choice-1);
+        switch (type) {
+            case "exam":
+                for (Exam e : course.getExams()) {
+                    System.out.println(e);
+                }
+                System.out.println("Vælg eksamen du vil slette: ");
+                choice = scanner.nextInt();
+                System.out.println(course.getExams().get(choice-1).getName() + " er blevet slettet!");
+                course.getExams().remove(choice-1);
+                scanner.nextLine();
+                break;
+            case "student":
+                for (Student s: course.getStudents()) {
+                    System.out.println(s);
+                }
+                System.out.println("Vælg student du vil slette: ");
+                choice = scanner.nextInt();
+                System.out.println(course.getStudents().get(choice-1).getName() + " er blevet slettet!");
+                course.getStudents().remove(choice-1);
+                scanner.nextLine();
+                break;
+            case "teacher":
+                for (Teacher t : course.getTeachers()) {
+                    System.out.println(t);
+                }
+                System.out.println("Vælg lærer/eksaminator du vil slette: ");
+                choice = scanner.nextInt();
+                System.out.println(course.getTeachers().get(choice-1).getName() + " er blevet slettet!");
+                course.getTeachers().remove(choice-1);
+                scanner.nextLine();
+                break;
+        }
     }
 
     private void studentInitializer(List<Student> students) {
