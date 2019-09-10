@@ -27,26 +27,34 @@ public class UI {
         run();
     }
 
-    public void run() {
+    private void run() {
         System.out.println("Hej - velkommen til kursus-systemet");
+        System.out.println("Vælg rolle, 1. Sekretær  2. Andet");
+        int role = scanner.nextInt();
 
         studentInitializer(studentsInSystem);
         teacherInitializer(teachersInSystem);
 
         String option = "";
         while (!option.equals("exit")) {
-            System.out.println("1. Opret kursus  " +
+            String menuOptions;
+            menuOptions = "1. Opret kursus  " +
                     "2. Slet kursus  " +
                     "3. Se oprettede kurser  " +
                     "4. Tilknyt lærer til kursus " +
-                    "5. Tilknyt studerende til kursus  " +
-                    "6. Tilknyt eksamen  " +
-                    "7. Slet eksamen   " +
-                    "8. Afmeld studerende fra kursus  " +
-                    "9. Afmeld lærer fra kursus  " +
-                    "10. Tilføj studerende til system  " +
-                    "11. Tilføj lærer til system  " +
-                    "'exit': Afslut");
+                    "5. Tilknyt eksamen til kursus " +
+                    "6. Slet eksamen fra kursus  " +
+                    "7. Afmeld lærer fra kursus  " +
+                    "8. Tilføj studerende til system  " +
+                    "9. Tilføj lærer til system  ";
+            if(role == 1) {
+                menuOptions += "10. Tilknyt studerende til kursus  " +
+                        "11. Afmeld studerende fra kursus  " +
+                        "12. Tilføj notat til studerende  ";
+            }
+            menuOptions += "'exit': Afslut";
+            System.out.println(menuOptions);
+
             option = scanner.nextLine();
             switch (option) {
                 case "1":
@@ -65,27 +73,33 @@ public class UI {
                     addPeopleToCourse("lærer", teachersInSystem);
                     break;
                 case "5":
-                    addPeopleToCourse("student", studentsInSystem);
-                    break;
-                case "6":
                     viewCourses();
                     courseHandler.addExamToCourse(scanner, coursesInSystem);
                     break;
-                case "7":
+                case "6":
+                    viewCourses();
                     removeFromCourse("exam");
                     break;
-                case "8":
-                    removeFromCourse("student");
-                    break;
-                case "9":
+                case "7":
+                    viewCourses();
                     removeFromCourse("teacher");
                     break;
-                case "10":
+                case "8":
                     addPeopleToSystem("student");
                     break;
-                case "11":
+                case "9":
                     addPeopleToSystem("teacher");
                     break;
+                    case "10":
+                        addPeopleToCourse("student", studentsInSystem);
+                        break;
+                    case "11":
+                        viewCourses();
+                        removeFromCourse("student");
+                        break;
+                    case "12":
+
+                        break;
                 case "exit":
                     System.out.println("Lukker ned...");
                     break;
@@ -97,7 +111,7 @@ public class UI {
         }
     }
 
-    public void addPeopleToSystem(String type) {
+    private void addPeopleToSystem(String type) {
         System.out.println("Tilføj " + type + " til systemet. Tryk 0 og 'ENTER' for at afslutte: ");
         String personName = scanner.nextLine();
         while (!personName.equals("0")) {
@@ -154,8 +168,7 @@ public class UI {
         scanner.nextLine();
     }
 
-    public void removeFromCourse(String type) {
-        viewCourses();
+    private void removeFromCourse(String type) {
         System.out.println("Vælg et kursus:");
         int choice = scanner.nextInt();
         Course course = coursesInSystem.get(choice-1);
