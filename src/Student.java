@@ -2,10 +2,12 @@ public class Student {
 
     private int id;
     private String name;
+    private String note;
 
-    public Student(int id, String name) {
+    public Student(int id, String name, String note) {
         this.id = id;
         this.name = name;
+        this.note = note;
     }
 
     public int getId() {

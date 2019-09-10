@@ -15,6 +15,7 @@ public class UI {
 
 
     private Scanner scanner = new Scanner(System.in);
+    private ConsoleColors cc = new ConsoleColors();
     private CourseHandler courseHandler = new CourseHandler();
     private List<Student> studentsInSystem = new ArrayList<>();
     private List<Teacher> teachersInSystem = new ArrayList<>();
@@ -102,7 +103,7 @@ public class UI {
         while (!personName.equals("0")) {
             switch (type){
                 case "student":
-                    studentsInSystem.add(new Student(studentId.incrementAndGet(), personName));
+                    studentsInSystem.add(new Student(studentId.incrementAndGet(), personName, ""));
                     break;
                 case "teacher":
                     teachersInSystem.add(new Teacher(teacherId.incrementAndGet(),personName));
@@ -194,7 +195,7 @@ public class UI {
 
     private void studentInitializer(List<Student> students) {
         for (int i = 0; i < 5; i++) {
-            students.add(new Student(studentId.incrementAndGet(), "S" + (i+1)));
+            students.add(new Student(studentId.incrementAndGet(), "S" + (i+1), ""));
         }
     }
 
