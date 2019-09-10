@@ -101,8 +101,8 @@ public class UI {
                     removeFromCourse("student");
                     break;
                 case "12":
-
-                        break;
+                    addNoteToStudent();
+                    break;
                 case "exit":
                     System.out.println("Lukker ned...");
                     break;
@@ -219,6 +219,18 @@ public class UI {
                 scanner.nextLine();
                 break;
         }
+    }
+
+    private void addNoteToStudent() {
+        for (Student s: studentsInSystem) {
+            System.out.println(s);
+        }
+        System.out.println("Vælg student du vil tilføje note til: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Skriv din note: ");
+        studentsInSystem.get(choice-1).setNote(scanner.nextLine());
     }
 
     private void studentInitializer(List<Student> students) {
