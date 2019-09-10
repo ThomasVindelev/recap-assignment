@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,11 +26,11 @@ public class UI {
     private AtomicInteger teacherId = new AtomicInteger();
     private AtomicInteger studentId = new AtomicInteger();
 
-    public UI() {
+    public UI() throws IOException {
         run();
     }
 
-    private void run() {
+    private void run() throws IOException {
         System.out.println("Hej - velkommen til kursus-systemet");
         System.out.println("Vælg rolle, 1. Sekretær  2. Andet");
         int role = scanner.nextInt();
@@ -90,14 +93,14 @@ public class UI {
                 case "9":
                     addPeopleToSystem("teacher");
                     break;
-                    case "10":
-                        addPeopleToCourse("student", studentsInSystem);
-                        break;
-                    case "11":
-                        viewCourses();
-                        removeFromCourse("student");
-                        break;
-                    case "12":
+                case "10":
+                    addPeopleToCourse("student", studentsInSystem);
+                    break;
+                case "11":
+                    viewCourses();
+                    removeFromCourse("student");
+                    break;
+                case "12":
 
                         break;
                 case "exit":
@@ -123,8 +126,20 @@ public class UI {
                     teachersInSystem.add(new Teacher(teacherId.incrementAndGet(),personName));
                     break;
             }
+            writeToFile(personName, type);
+
             System.out.println("Added new " + type);
             personName = scanner.nextLine();
+        }
+    }
+
+    private void writeToFile(String write, String file) {
+        try {
+            PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\Goodman\\OneDrive\\#DATA\\3. Semester\\OOP\\Recap Assignment 2\\src\\"+file+".txt", true));
+            out.append(write + "\n");
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -143,7 +158,7 @@ public class UI {
         }
     }
 
-    private void addPeopleToCourse(String type, List objects) {
+    private void addPeopleToCourse(String type, List objects) throws IOException {
         viewCourses();
         System.out.println("Vælg et kursus:");
         int choice = scanner.nextInt();

@@ -27,6 +27,6 @@ public class Student {
     }
 
     public String toString() {
-        return "ID: " + id + "  Navn: " + name + "  Student";
+        return "ID: " + id + "  Navn: " + name + "student";
     }
 }
