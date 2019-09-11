@@ -15,11 +15,11 @@ public class UI {
     private AtomicInteger teacherId = new AtomicInteger();
     private AtomicInteger studentId = new AtomicInteger();
 
-    public UI() throws IOException {
+    public UI() {
         run();
     }
 
-    private void run() throws IOException {
+    private void run() {
         System.out.println("Hej - velkommen til kursus-systemet");
         System.out.println("Vælg rolle, 1. Sekretær  2. Andet");
         int role = scanner.nextInt();
@@ -46,7 +46,7 @@ public class UI {
                         "12. Tilføj notat til studerende  ";
             }
             menuOptions += "'exit': Afslut";
-            System.out.println(menuOptions);
+            cc.printTxtGreen(menuOptions).print(true);
 
             option = scanner.nextLine();
             switch (option) {
@@ -57,13 +57,15 @@ public class UI {
                     for (Course course : coursesInSystem) {
                         System.out.println(course);
                     }
-                    coursesInSystem.remove(scanner.nextInt());
+                    coursesInSystem.remove(scanner.nextInt()-1);
+                    scanner.nextLine();
                     break;
                 case "3":
                     viewCourses();
                     break;
                 case "4":
-                    addPeopleToCourse("lærer", teachersInSystem);
+                    viewCourses();
+                    courseHandler.addPeopleToCourse("lærer", teachersInSystem, scanner, coursesInSystem);
                     break;
                 case "5":
                     viewCourses();
@@ -87,7 +89,7 @@ public class UI {
                     break;
                 case "10":
                     viewCourses();
-                    addPeopleToCourse("student", studentsInSystem);
+                    courseHandler.addPeopleToCourse("student", studentsInSystem, scanner, coursesInSystem);
                     break;
                 case "11":
                     viewCourses();
@@ -152,69 +154,6 @@ public class UI {
             }
         }
     }
-
-    /*private void addPeopleToCourse(String type, List objects) throws IOException {
-        viewCourses();
-        System.out.println("Vælg et kursus:");
-        int choice = scanner.nextInt();
-        Course course = coursesInSystem.get(choice-1);
-        System.out.println("Vælg " + type + " til kursus. Tryk 0 for at afslutte: ");
-        for (Object o : objects) {
-            System.out.println(o);
-        }
-        choice = scanner.nextInt();
-        while (choice != 0) {
-            switch (type) {
-                case "student":
-                    course.getStudents().add(studentsInSystem.get(choice-1));
-                    break;
-                case "lærer":
-                    course.getTeachers().add(teachersInSystem.get(choice-1));
-                    break;
-            }
-            cc.printTxtGreen(objects.get(choice-1) + " er blevet tilføjet!").print(true);
-            choice = scanner.nextInt();
-        }
-        scanner.nextLine();
-    }
-
-    private void removePeopleFromCourse(String type) {
-        System.out.println("Vælg et kursus:");
-        int choice = scanner.nextInt();
-        Course course = coursesInSystem.get(choice-1);
-        switch (type) {
-            case "exam":
-                for (Exam e : course.getExams()) {
-                    System.out.println(e);
-                }
-                System.out.println("Vælg eksamen du vil slette: ");
-                choice = scanner.nextInt();
-                System.out.println(course.getExams().get(choice-1).getName() + " er blevet slettet!");
-                course.getExams().remove(choice-1);
-                scanner.nextLine();
-                break;
-            case "student":
-                for (Student s: course.getStudents()) {
-                    System.out.println(s);
-                }
-                System.out.println("Vælg student du vil slette: ");
-                choice = scanner.nextInt();
-                System.out.println(course.getStudents().get(choice-1).getName() + " er blevet slettet!");
-                course.getStudents().remove(choice-1);
-                scanner.nextLine();
-                break;
-            case "teacher":
-                for (Teacher t : course.getTeachers()) {
-                    System.out.println(t);
-                }
-                System.out.println("Vælg lærer/eksaminator du vil slette: ");
-                choice = scanner.nextInt();
-                System.out.println(course.getTeachers().get(choice-1).getName() + " er blevet slettet!");
-                course.getTeachers().remove(choice-1);
-                scanner.nextLine();
-                break;
-        }
-    }*/
 
     private void addNoteToStudent() {
         for (Student s: studentsInSystem) {

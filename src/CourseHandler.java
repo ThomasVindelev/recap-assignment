@@ -66,10 +66,10 @@ public class CourseHandler {
         while (choice != 0) {
             switch (type) {
                 case "student":
-                    course.getStudents().add(studentsInSystem.get(choice-1));
+                    course.getStudents().add((Student) objects.get(choice-1));
                     break;
                 case "lærer":
-                    course.getTeachers().add(teachersInSystem.get(choice-1));
+                    course.getTeachers().add((Teacher) objects.get(choice-1));
                     break;
             }
             System.out.println(objects.get(choice-1) + " er blevet tilføjet!");
