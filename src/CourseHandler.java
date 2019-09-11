@@ -1,5 +1,6 @@
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -53,6 +54,68 @@ public class CourseHandler {
         }
     }
 
+    public void addPeopleToCourse(String type, List objects, Scanner scanner, List<Course> coursesInSystem) {
+        System.out.println("Vælg et kursus:");
+        int choice = scanner.nextInt();
+        Course course = coursesInSystem.get(choice-1);
+        System.out.println("Vælg " + type + " til kursus. Tryk 0 for at afslutte: ");
+        for (Object o : objects) {
+            System.out.println(o);
+        }
+        choice = scanner.nextInt();
+        while (choice != 0) {
+            switch (type) {
+                case "student":
+                    course.getStudents().add(studentsInSystem.get(choice-1));
+                    break;
+                case "lærer":
+                    course.getTeachers().add(teachersInSystem.get(choice-1));
+                    break;
+            }
+            System.out.println(objects.get(choice-1) + " er blevet tilføjet!");
+            choice = scanner.nextInt();
+        }
+        scanner.nextLine();
+    }
+
+    public void removeFromCourse(String type, Scanner scanner, List<Course> coursesInSystem) {
+        System.out.println("Vælg et kursus:");
+        int choice = scanner.nextInt();
+        Course course = coursesInSystem.get(choice-1);
+        switch (type) {
+            case "exam":
+                for (Exam e : course.getExams()) {
+                    System.out.println(e);
+                }
+                System.out.println("Vælg eksamen du vil slette: ");
+                choice = scanner.nextInt();
+                System.out.println(course.getExams().get(choice-1).getName() + " er blevet slettet!");
+                course.getExams().remove(choice-1);
+                scanner.nextLine();
+                break;
+            case "student":
+                for (Student s: course.getStudents()) {
+                    System.out.println(s);
+                }
+                System.out.println("Vælg student du vil slette: ");
+                choice = scanner.nextInt();
+                System.out.println(course.getStudents().get(choice-1).getName() + " er blevet slettet!");
+                course.getStudents().remove(choice-1);
+                scanner.nextLine();
+                break;
+            case "teacher":
+                for (Teacher t : course.getTeachers()) {
+                    System.out.println(t);
+                }
+                System.out.println("Vælg lærer/eksaminator du vil slette: ");
+                choice = scanner.nextInt();
+                System.out.println(course.getTeachers().get(choice-1).getName() + " er blevet slettet!");
+                course.getTeachers().remove(choice-1);
+                scanner.nextLine();
+                break;
+        }
+    }
+
 
     private List makeList(Scanner scanner, String type, List systemList) {
         List<Object> tempList = new ArrayList<>();
@@ -70,5 +133,4 @@ public class CourseHandler {
         }
         return tempList;
     }
-
 }

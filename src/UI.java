@@ -6,15 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class UI {
 
-    /*
-    TO DO
-    -Check for duplicates
-    -Make proper id's
-    -Better toString
-    -Method for getting course
-     */
-
-
     private Scanner scanner = new Scanner(System.in);
     private ConsoleColors cc = new ConsoleColors();
     private CourseHandler courseHandler = new CourseHandler();
@@ -36,9 +27,6 @@ public class UI {
 
         readFromFile("student", studentsInSystem);
         readFromFile("teacher", teachersInSystem);
-
-        /*studentInitializer();
-        teacherInitializer()*/;
 
         String option = "";
         while (!option.equals("exit")) {
@@ -83,24 +71,27 @@ public class UI {
                     break;
                 case "6":
                     viewCourses();
-                    removeFromCourse("exam");
+                    courseHandler.removeFromCourse("exam", scanner, coursesInSystem);
                     break;
                 case "7":
                     viewCourses();
-                    removeFromCourse("teacher");
+                    courseHandler.removeFromCourse("teacher", scanner, coursesInSystem);
                     break;
                 case "8":
+                    viewCourses();
                     addPeopleToSystem("student");
                     break;
                 case "9":
+                    viewCourses();
                     addPeopleToSystem("teacher");
                     break;
                 case "10":
+                    viewCourses();
                     addPeopleToCourse("student", studentsInSystem);
                     break;
                 case "11":
                     viewCourses();
-                    removeFromCourse("student");
+                    courseHandler.removeFromCourse("student", scanner, coursesInSystem);
                     break;
                 case "12":
                     addNoteToStudent();
@@ -162,7 +153,7 @@ public class UI {
         }
     }
 
-    private void addPeopleToCourse(String type, List objects) throws IOException {
+    /*private void addPeopleToCourse(String type, List objects) throws IOException {
         viewCourses();
         System.out.println("Vælg et kursus:");
         int choice = scanner.nextInt();
@@ -187,7 +178,7 @@ public class UI {
         scanner.nextLine();
     }
 
-    private void removeFromCourse(String type) {
+    private void removePeopleFromCourse(String type) {
         System.out.println("Vælg et kursus:");
         int choice = scanner.nextInt();
         Course course = coursesInSystem.get(choice-1);
@@ -223,7 +214,7 @@ public class UI {
                 scanner.nextLine();
                 break;
         }
-    }
+    }*/
 
     private void addNoteToStudent() {
         for (Student s: studentsInSystem) {
@@ -259,18 +250,5 @@ public class UI {
         }
 
 
-    }
-
-    /*private void studentInitializer(List<Student> students) {
-        readFromFile("student");
-
-        for (int i = 0; i < 5; i++) {
-        }
-    }*/
-
-    private void teacherInitializer(List<Teacher> teachers) {
-        for (int i = 0; i < 5; i++) {
-            teachers.add(new Teacher(teacherId.incrementAndGet(), "L" + (i+1)));
-        }
     }
 }
