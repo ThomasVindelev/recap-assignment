@@ -1,6 +1,4 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,9 +32,13 @@ public class UI {
         System.out.println("Hej - velkommen til kursus-systemet");
         System.out.println("Vælg rolle, 1. Sekretær  2. Andet");
         int role = scanner.nextInt();
+        scanner.nextLine();
 
-        studentInitializer(studentsInSystem);
-        teacherInitializer(teachersInSystem);
+        readFromFile("student", studentsInSystem);
+        readFromFile("teacher", teachersInSystem);
+
+        /*studentInitializer();
+        teacherInitializer()*/;
 
         String option = "";
         while (!option.equals("exit")) {
@@ -133,9 +135,11 @@ public class UI {
         }
     }
 
+
+
     private void writeToFile(String write, String file) {
         try {
-            PrintWriter out = new PrintWriter(new FileWriter("C:\\Users\\Goodman\\OneDrive\\#DATA\\3. Semester\\OOP\\Recap Assignment 2\\src\\"+file+".txt", true));
+            PrintWriter out = new PrintWriter(new FileWriter("src\\" + file + ".txt", true));
             out.append(write + "\n");
             out.close();
         } catch (Exception e) {
@@ -177,7 +181,7 @@ public class UI {
                     course.getTeachers().add(teachersInSystem.get(choice-1));
                     break;
             }
-            System.out.println(objects.get(choice-1) + " has been added");
+            cc.printTxtGreen(objects.get(choice-1) + " er blevet tilføjet!").print(true);
             choice = scanner.nextInt();
         }
         scanner.nextLine();
@@ -233,11 +237,36 @@ public class UI {
         studentsInSystem.get(choice-1).setNote(scanner.nextLine());
     }
 
-    private void studentInitializer(List<Student> students) {
-        for (int i = 0; i < 5; i++) {
-            students.add(new Student(studentId.incrementAndGet(), "S" + (i+1), ""));
+    private void readFromFile(String fileName, List list) {
+        File file = new File("src\\" + fileName + ".txt");
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+            while((st = br.readLine()) != null) {
+                switch (fileName) {
+                    case "student":
+                        list.add(new Student(studentId.incrementAndGet(), st, ""));
+                        break;
+                    case "teacher":
+                        list.add(new Teacher(teacherId.incrementAndGet(), st));
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
     }
+
+    /*private void studentInitializer(List<Student> students) {
+        readFromFile("student");
+
+        for (int i = 0; i < 5; i++) {
+        }
+    }*/
 
     private void teacherInitializer(List<Teacher> teachers) {
         for (int i = 0; i < 5; i++) {
