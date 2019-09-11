@@ -35,6 +35,6 @@ public class Student {
     }
 
     public String toString() {
-        return "ID: " + id + "  Navn: " + name + " - student";
+        return "ID: " + id + "  Navn: " + name;
     }
 }

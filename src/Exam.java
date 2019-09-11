@@ -27,6 +27,6 @@ public class Exam {
     }
 
     public String toString() {
-        return "ID: " + id + "  Navn: " + name + " Eksamen";
+        return "ID: " + id + "  Navn: " + name;
     }
 }

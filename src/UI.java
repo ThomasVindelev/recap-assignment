@@ -143,12 +143,15 @@ public class UI {
     private void viewCourses() {
         for (Course course : coursesInSystem) {
             System.out.println(course);
+            System.out.println("STUDERENDE:");
             for (int j = 0; j < course.getStudents().size(); j++) {
                 System.out.println(course.getStudents().get(j));
             }
+            System.out.println("LÆRERE:");
             for (int k = 0; k < course.getTeachers().size(); k++) {
                 System.out.println(course.getTeachers().get(k));
             }
+            System.out.println("EKSAMNER:");
             for (int L = 0; L < course.getExams().size(); L++) {
                 System.out.println(course.getExams().get(L));
             }

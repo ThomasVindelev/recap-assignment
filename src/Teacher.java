@@ -25,6 +25,6 @@ public class Teacher {
     }
 
     public String toString() {
-        return "ID: " + id + "  Navn: " + name + "  Lærer";
+        return "ID: " + id + "  Navn: " + name;
     }
 }
